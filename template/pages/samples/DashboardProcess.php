@@ -9,7 +9,7 @@ foreach ($results as $result) {
     <td><?php echo $result['user_id'] ?></td>
     <td><?php echo $result['user_name'] ?></td>
     <td><?php echo $result['user_email'] ?></td>
-    <td><a class="btn btn-success" href="#">Update</a></td>
+    <td><a class="btn btn-success" href="./pages/crud/edit.php">Edit</a></td>
     <td><a class="btn btn-danger" href="#">Delete</a></td>
     
 </tr>

@@ -1,19 +1,18 @@
 
 <?php 
-include "db_conn.php";
-$id = $_GET['id'];
+include "../samples/connection.php";
+$user_id = $_GET['user_id'];
 
 if(isset($_POST['submit'])){
-    $first_name =$_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $gender = $_POST['gender'];
+    $user_name =$_POST['user_name'];
 
-    $sql = "UPDATE `crud` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`gender`='$gender' WHERE id=$id";
+    $user_email = $_POST['user_email'];
+
+    $sql = "UPDATE `users` SET `user_name`='$user_name',`user_email`='$user_email' WHERE 'user_id'=$user_id";
 
     $result = mysqli_query($conn, $sql);
     if($result) {
-        header("Location: index.php?msg=Data Updataed successfully");
+        header("Location:../../index.php?msg=Data Updataed successfully");
     }
     else{
         echo "Failed:" .mysqli_error($conn);
@@ -45,7 +44,7 @@ if(isset($_POST['submit'])){
             <h3>Edit User Information</h3>
             <p class="text-muted">Click update after changing any information</p>
             <?php
-            $sql ="SELECT * FROM `crud` WHERE id = $id LIMIT 1";
+            $sql ="SELECT * FROM `users` WHERE user_id = $user_id";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc( $result);
             ?>
@@ -54,29 +53,18 @@ if(isset($_POST['submit'])){
                 <form action="" method="post" style="width: 50vh; min-width: 400px;">
                  <div class="row">
                     <div class="col">
-                        <label class="form-label">First Name:</label>
-                        <input type="text" class="form-control" name="first_name" value="<?php echo $row['first_name'] ?>">
+                        <label class="form-label">Name:</label>
+                        <input type="text" class="form-control" name="user_name" value="<?php echo $row['user_name'] ?>">
                     </div>
                     <div class="col">
                         <label class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" name="last_name" value="<?php echo $row['last_name'] ?>">
+                        <input type="text" class="form-control" name="user_email" value="<?php echo $row['user_email'] ?>">
                     </div>
                  </div>
-                 <div class="mb-3 mt-2">
-                    <label class="form-label float-start">Email:</label>
-                    <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
-                 </div>
-                 <div class="form-group mb-3">
-                    <label>Gender:</label> &nbsp;
-                    <input type="radio" class="form-check-input" name="gender" id="male" value="male" <?php echo ($row['gender']=='male') ? "checked":"";?>>
-                    <label for="male" class="form-input-label">Male</label>
-                     &nbsp;
-                    <input type="radio" class="form-check-input" name="gender" id="female" value="female" <?php echo ($row['gender']=='female') ? "checked":"";?>>
-                    <label for="female" class="form-input-label">Female</label>
-                 </div>
+                
                  <div>
                     <button type="submit" class="btn btn-success col-sm-3 text-uppercase" name="submit">Update</button>
-                    <a href="index.php" class="btn btn-danger col-sm-3 text-uppercase">Cancel</a>
+                    <a href="../../index.php" class="btn btn-danger col-sm-3 text-uppercase">Cancel</a>
                  </div>
                 </form>
             </div>
