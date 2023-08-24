@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
 
     $user_email = $_POST['user_email'];
 
-    $sql = "UPDATE `users` SET `user_name`='$user_name',`user_email`='$user_email' WHERE 'user_id'=$user_id";
+    $sql = "UPDATE `users` SET `user_name`='$user_name',`user_email`='$user_email' WHERE user_id=$user_id";
 
     $result = mysqli_query($conn, $sql);
     if($result) {
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
             <h3>Edit User Information</h3>
             <p class="text-muted">Click update after changing any information</p>
             <?php
-            $sql ="SELECT * FROM `users` WHERE user_id = $user_id";
+            $sql ="SELECT * FROM `users` WHERE user_id = $user_id LIMIT 1";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc( $result);
             ?>
